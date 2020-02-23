@@ -142,5 +142,10 @@ public class WordSearch {
 
         WordSearch t = new WordSearch();
         System.out.println(t.exist(board,word));
+
+        System.out.println(WordSearch.class.getName());
     }
+
+
+
 }

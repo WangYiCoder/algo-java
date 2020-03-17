@@ -37,8 +37,35 @@ public class LCAOfBTree {
         System.out.println(treeNode.val);
     }
 
+    //a more simplified solution from discussion area which fully utilized recursive
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q){
+
+        if (root == null || root == p || root == q){
+            return root;
+        }
+
+        TreeNode leftResult = lowestCommonAncestor(root.left, p, q);
+        TreeNode rightResult = lowestCommonAncestor(root.right, p, q);
+
+        if (leftResult!= null && rightResult != null){
+            return root;
+        }
+
+        if (leftResult != null){
+            return leftResult;
+        }
+
+        if (rightResult != null){
+            return rightResult;
+        }
+
+        return null;
+
+    }
+
+
     //todo time and space complexity can be improved
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+    /*public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 
         //try to use preOrder travesal
         if (root == null){
@@ -129,7 +156,7 @@ public class LCAOfBTree {
             this.depth = depth;
             this.horizontal = horizontal;
         }
-    }
+    }*/
 
     public static class TreeNode {
         int val;

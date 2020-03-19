@@ -1,5 +1,9 @@
 package study.algorithm.dp;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 /**
  * Created by EricWang on 2020/3/15 8:54 AM.
  * leetcode link: https://leetcode.com/problems/partition-equal-subset-sum/
@@ -31,12 +35,26 @@ public class PartitionEqualSubsetSum {
         }
 
         //check if part of the elements sum can be sum/2
-        //solution would be similar to knapsack
         int target = sum/2;
-        boolean[][] temp = new boolean[nums.length][target+1];
-        int tempSum = 0;
 
-        return check(0,tempSum,temp,target,nums);
+        //solution1: similar to knapsack, recursive
+        /*boolean[][] temp = new boolean[nums.length][target+1];
+        int tempSum = 0;
+        return check(0,tempSum,temp,target,nums);*/
+
+
+        //solution2: use bottom to up dp
+        boolean[] dp = new boolean[target+1];
+        dp[0] = true;
+        for (int i = 0; i < nums.length; i++){
+            for (int j = target; j >= nums[i]; j--){
+                dp[j] = dp[j] || dp[j - nums[i]];
+                if (dp[target]){
+                    return true;
+                }
+            }
+        }
+        return false;
 
     }
 
